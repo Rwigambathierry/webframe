@@ -1,0 +1,37 @@
+[unix_http_server]
+file=/var/run/supervisor.sock
+
+[supervisord]
+logfile=/var/log/supervisor/supervisord.log
+pidfile=/var/run/supervisord.pid
+childlogdir=/var/log/supervisor
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+
+[supervisorctl]
+serverurl=unix:///var/run/supervisor.sock
+
+[program:php-fpm]
+command=/usr/sbin/php-fpm8.1 -F
+autostart=true
+autorestart=true
+stdout_logfile=/var/log/supervisor/php-fpm.log
+stderr_logfile=/var/log/supervisor/php-fpm-error.log
+priority=999
+
+[program:mysql]
+command=/usr/sbin/mysqld --bind-address=127.0.0.1
+autostart=true
+autorestart=true
+stdout_logfile=/var/log/supervisor/mysql.log
+stderr_logfile=/var/log/supervisor/mysql-error.log
+priority=998
+
+[program:nginx]
+command=/usr/sbin/nginx -g "daemon off;"
+autostart=true
+autorestart=true
+stdout_logfile=/var/log/supervisor/nginx.log
+stderr_logfile=/var/log/supervisor/nginx-error.log
+priority=997

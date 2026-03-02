@@ -1,0 +1,14 @@
+.git
+.gitignore
+nbproject/
+.DS_Store
+*.swp
+*.swo
+Dockerfile
+supervisord.conf
+nginx.conf
+README.md
+.env
+node_modules/
+.vscode/
+.idea/
