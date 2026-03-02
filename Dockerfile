@@ -37,10 +37,10 @@ RUN mkdir -p /var/log/supervisor /var/run/php-fpm /var/run/mysqld \
     && chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
 
 # Copy supervisor configuration
-RUN mv supervisord.conf /etc/supervisor/supervisord.conf
+COPY ./supervisord.conf /etc/supervisor/supervisord.conf
 
 # Copy nginx configuration
-RUN mv nginx.conf /etc/nginx/sites-available/default
+COPY ./nginx.conf /etc/nginx/sites-available/default
 
 # Initialize MySQL
 RUN service mysql start && \
